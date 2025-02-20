@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestasi Kobrasga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animasi Running Text */
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        .running-text {
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            animation: marquee 20s linear infinite;
+        }
+
+        /* Responsif untuk iframe */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .iframe-container iframe,
+        .iframe-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col m-0 p-0">
+
+    <!-- Header -->
+    <header class="bg-red-700 text-white text-center py-4 text-xl font-bold fixed top-0 w-full z-10">
+        Penampilan - Kobrasga
+    </header>
+
+    <!-- Container -->
+    <div class="flex flex-1 flex-col md:flex-row mt-12 mb-16 w-full">
+        <!-- Video/Gambar -->
+        <div class="flex-1">
+            <div class="iframe-container">
+                <img id="imageFrame" src="img1.png" alt="Thumbnail" class="w-full h-full">
+                <iframe id="videoFrame" class="hidden" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="w-full md:w-1/4 flex flex-col gap-4 p-4 bg-white shadow-lg">
+            <button class="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 transition change-video"
+                data-video="https://www.youtube.com/embed/RuvM7Fn5DNw?si=TA4MCdUqt-OT88mB">LKPBB JENGGALA</button>
+            <button class="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 transition change-video"
+                data-video="https://www.youtube.com/embed/7lBwBoyOfs0?si=-_RaduBR58FqLQqK">LKBB MAPS</button>
+            <button class="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 transition change-video"
+                data-video="https://www.youtube.com/embed/__j9tOBUAaE?si=e0N9y6Rcuq4KwxVN">LKBB PANDAWA</button>
+            <button class="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 transition change-video"
+                data-video="https://www.youtube.com/embed/D1uUzrdcmS0?si=vkRz-8xuIpG5QUA1">LKBB AMBARAWA</button>
+            <button class="w-full py-3 bg-white text-black border border-gray-300 rounded-lg shadow-md hover:bg-gray-200 transition change-video"
+                data-video="https://www.youtube.com/embed/patf4rhJSU8?si=cuNU5d4KeTJgfWsQ">LKBB NETIZEN</button>
+            <button class="w-full py-3 bg-red-500 text-white font-bold rounded-lg shadow-md hover:bg-red-600 transition"
+                onclick="showImage()">Kembali ke Gambar</button>
+        </div>
+    </div>
+
+    <!-- Footer dengan Running Text -->
+    <footer class="bg-red-700 text-white text-center py-3 fixed bottom-0 w-full overflow-hidden">
+        <div class="running-text">
+            Selamat Datang di Website Prestasi - Kobrasga! 🎉 Lihat berbagai video penampilan dari satuan terbaik!
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function showVideo(videoUrl) {
+            document.getElementById("imageFrame").classList.add("hidden");
+            document.getElementById("videoFrame").classList.remove("hidden");
+            document.getElementById("videoFrame").src = videoUrl;
+        }
+
+        function showImage() {
+            document.getElementById("videoFrame").classList.add("hidden");
+            document.getElementById("imageFrame").classList.remove("hidden");
+            document.getElementById("videoFrame").src = ""; // Stop video saat kembali ke gambar
+        }
+
+        document.querySelectorAll(".change-video").forEach(button => {
+            button.addEventListener("click", function () {
+                showVideo(this.getAttribute("data-video"));
+            });
+        });
+    </script>
+
+</body>
+</html>
